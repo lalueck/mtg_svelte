@@ -11,7 +11,7 @@
 {#await cardPromise}
 	<p>...waiting</p>
 {:then object}
-	<p>{JSON.stringify(object.cards[0].name)}</p>
+	<p>{object.cards[0].name}</p>
 	<!-- svelte-ignore a11y-img-redundant-alt -->
 	<img src="{object.cards[0].imageUrl}" alt="image of the card"/>
 {:catch error}
