@@ -17,13 +17,7 @@
 			inProgress = false;
 		})
 	}
-	// function enableButton(){
-	// 	inProgress = false;
-	// 	return "";
-	// }
 </script>
-
-<!-- TODO: fix search and random working at once -->
 
 <center>
 	<input bind:value={searchQarry}>
@@ -37,7 +31,6 @@
 	{#await cardPromise}
 	<p>...waiting</p>
 	{:then object}
-	<!-- {enableButton()} -->
 	<h1>{object.cards[0].name}</h1>
 	<IsPresentH3 value={object.cards[0].names} />
 	<!-- svelte-ignore a11y-img-redundant-alt -->
