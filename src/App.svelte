@@ -22,14 +22,11 @@
 	<img src="{object.cards[0].imageUrl}" alt="image of the card"/>
 
 	<!-- ausklappbar -->
-	<p>text</p><IsPresentP value={object.cards[0].text}/>
-	<p>power</p><IsPresentP value={object.cards[0].power}/>
-	<p>toughness</p><IsPresentP value={object.cards[0].toughness}/>
-
-
-
-
-
+	<p>Text</p><IsPresentP value={object.cards[0].text}/>
+	{#if object.cards[0].types[0] == "Creature"}
+		<p>Power</p><IsPresentP value={object.cards[0].power}/>
+		<p>Toughness</p><IsPresentP value={object.cards[0].toughness}/>
+	{/if}
 
 	<div class="accordion" id="accordionPanelsStayOpenExample">
 		<div class="accordion-item">
@@ -40,10 +37,10 @@
 		  </h2>
 		  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
 			<div class="accordion-body">
-				<p>manaCost</p><IsPresentP value={object.cards[0].manaCost}/>
+				<p>Mana Cost</p><IsPresentP value={object.cards[0].manaCost}/>
 				<p>cmc</p><IsPresentP value={object.cards[0].cmc}/>
-				<p>colors</p><IsPresentP value={object.cards[0].colors}/>
-				<p>colorIdentity</p><IsPresentP value={object.cards[0].colorIdentity}/>
+				<p>Colors</p><IsPresentP value={object.cards[0].colors}/>
+				<p>Color Identity</p><IsPresentP value={object.cards[0].colorIdentity}/>
 			</div>
 		  </div>
 		</div>
@@ -55,10 +52,10 @@
 		  </h2>
 		  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
 			<div class="accordion-body">
-				<p>type</p><IsPresentP value={object.cards[0].type}/>
-				<p>supertypes</p><IsPresentP value={object.cards[0].supertypes}/>
-				<p>types</p><IsPresentP value={object.cards[0].types}/>
-				<p>subtypes</p><IsPresentP value={object.cards[0].subtypes}/>
+				<p>Type</p><IsPresentP value={object.cards[0].type}/>
+				<p>Supertypes</p><IsPresentP value={object.cards[0].supertypes}/>
+				<p>Types</p><IsPresentP value={object.cards[0].types}/>
+				<p>Subtypes</p><IsPresentP value={object.cards[0].subtypes}/>
 			</div>
 		  </div>
 		</div>
@@ -70,12 +67,12 @@
 		  </h2>
 		  <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
 			<div class="accordion-body">
-				<p>rarity</p><IsPresentP value={object.cards[0].rarity}/>
-				<p>set</p><IsPresentP value={object.cards[0].set}/>
-				<p>artist</p><IsPresentP value={object.cards[0].artist}/>
-				<p>number</p><IsPresentP value={object.cards[0].number}/>
-				<p>multiverseid</p><IsPresentP value={object.cards[0].multiverseid}/>
-				<p>id</p><IsPresentP value={object.cards[0].id}/>
+				<p>Rarity</p><IsPresentP value={object.cards[0].rarity}/>
+				<p>Set</p><IsPresentP value={object.cards[0].set}/>
+				<p>Artist</p><IsPresentP value={object.cards[0].artist}/>
+				<p>Number</p><IsPresentP value={object.cards[0].number}/>
+				<p>Multiverseid</p><IsPresentP value={object.cards[0].multiverseid}/>
+				<p>ID</p><IsPresentP value={object.cards[0].id}/>
 			</div>
 		  </div>
 		</div>
@@ -87,10 +84,9 @@
 			</h2>
 			<div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
 			  <div class="accordion-body">
-				<p>rulings</p><IsPresentP value={object.cards[0].rulings}/>
-				<p>originalText</p><IsPresentP value={object.cards[0].originalText}/>
-				<p>originalType</p><IsPresentP value={object.cards[0].originalType}/>
-			
+				<p>Rulings</p><IsPresentP value={object.cards[0].rulings}/>
+				<p>Original Text</p><IsPresentP value={object.cards[0].originalText}/>
+				<p>Original Type</p><IsPresentP value={object.cards[0].originalType}/>
 			  </div>
 			</div>
 		  </div>
