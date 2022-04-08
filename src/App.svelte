@@ -2,7 +2,6 @@
 	
 	import IsPresentH3 from "./IsPresentH3.svelte"
 	import IsPresentP from "./IsPresentP.svelte"
-	import IsPresentPMulti from "./isPresentPMulti.svelte"
 
 	const getCard = async () => {
 		var response = await fetch('https://api.magicthegathering.io/v1/cards?random=true&pageSize=01&contains=imageUrl&layout=normal');
