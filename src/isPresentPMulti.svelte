@@ -4,8 +4,6 @@
 </script>
 
 {#if value}
-	{#if string != "0"}	
-		<p>{string}</p>	
-	{/if}
-		<p>{String(value)}</p>
+	<p>{string}</p>	
+	<p>{JSON.stringify(value)}</p>
 	{/if}
