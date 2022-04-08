@@ -3,6 +3,7 @@
 	import IsPresentH3 from "./IsPresentH3.svelte"
 	import IsPresentP from "./IsPresentP.svelte"
 	let	cardPromise = null
+	let searchQarry = null
 	async function getCard(userInput){
 		var response = await fetch('https://api.magicthegathering.io/v1' + userInput);
 		var result = await response.json();
@@ -13,13 +14,15 @@
 	}
 </script>
 
+<!-- TODO: fix search and random working at once -->
 
 <center>
+	<input bind:value={searchQarry}>
+	<button on:click={()=>{loadCard(`/cards?pageSize=01&contains=imageUrl&layout=normal&name="${searchQarry}"`)}}>
+		Search for card
+	</button>
 	<button on:click={()=>{loadCard("/cards?random=true&pageSize=01&contains=imageUrl&layout=normal")}}>
 		Random Card
-	</button>
-	<button on:click={()=>{loadCard()}}>
-		Also random card
 	</button>
 {#if cardPromise}
 	{#await cardPromise}
