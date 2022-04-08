@@ -2,6 +2,8 @@
 	
 	import IsPresentH3 from "./IsPresentH3.svelte"
 	import IsPresentP from "./IsPresentP.svelte"
+	import IsPresentPMulti from "./isPresentPMulti.svelte"
+
 	const getCard = async () => {
 		var response = await fetch('https://api.magicthegathering.io/v1/cards?random=true&pageSize=01&contains=imageUrl&layout=normal');
 		var result = await response.json();
@@ -22,11 +24,13 @@
 	<img src="{object.cards[0].imageUrl}" alt="image of the card"/>
 
 	<!-- ausklappbar -->
-	<p>Text</p><IsPresentP value={object.cards[0].text}/>
+	<IsPresentP value={object.cards[0].text} string="Text"/>
+	<i><IsPresentP value={object.cards[0].flavor}, string="0"/></i>
 	{#if object.cards[0].types[0] == "Creature"}
-		<p>Power</p><IsPresentP value={object.cards[0].power}/>
-		<p>Toughness</p><IsPresentP value={object.cards[0].toughness}/>
+		<IsPresentP value={object.cards[0].power} string="Power"/>
+		<IsPresentP value={object.cards[0].toughness} string="Toughness"/>
 	{/if}
+<!-- each ruling as ruling -->
 
 	<div class="accordion" id="accordionPanelsStayOpenExample">
 		<div class="accordion-item">
@@ -37,10 +41,10 @@
 		  </h2>
 		  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
 			<div class="accordion-body">
-				<p>Mana Cost</p><IsPresentP value={object.cards[0].manaCost}/>
-				<p>cmc</p><IsPresentP value={object.cards[0].cmc}/>
-				<p>Colors</p><IsPresentP value={object.cards[0].colors}/>
-				<p>Color Identity</p><IsPresentP value={object.cards[0].colorIdentity}/>
+				<IsPresentP value={object.cards[0].manaCost} string="Mana Cost"/>
+				<IsPresentP value={object.cards[0].cmc} string="Total mana cost"/>
+				<IsPresentP value={object.cards[0].colors} string="Colours"/>
+				<IsPresentP value={object.cards[0].colorIdentity} string="Colour Identity"/>
 			</div>
 		  </div>
 		</div>
@@ -52,10 +56,10 @@
 		  </h2>
 		  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
 			<div class="accordion-body">
-				<p>Type</p><IsPresentP value={object.cards[0].type}/>
-				<p>Supertypes</p><IsPresentP value={object.cards[0].supertypes}/>
-				<p>Types</p><IsPresentP value={object.cards[0].types}/>
-				<p>Subtypes</p><IsPresentP value={object.cards[0].subtypes}/>
+				<IsPresentP value={object.cards[0].type} string="Type"/>
+				<IsPresentP value={object.cards[0].supertypes} string="Super Type"/>
+				<IsPresentP value={object.cards[0].types} string="Types"/>
+				<IsPresentP value={object.cards[0].subtypes} string="Sub Types"/>
 			</div>
 		  </div>
 		</div>
@@ -67,12 +71,12 @@
 		  </h2>
 		  <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
 			<div class="accordion-body">
-				<p>Rarity</p><IsPresentP value={object.cards[0].rarity}/>
-				<p>Set</p><IsPresentP value={object.cards[0].set}/>
-				<p>Artist</p><IsPresentP value={object.cards[0].artist}/>
-				<p>Number</p><IsPresentP value={object.cards[0].number}/>
-				<p>Multiverseid</p><IsPresentP value={object.cards[0].multiverseid}/>
-				<p>ID</p><IsPresentP value={object.cards[0].id}/>
+				<IsPresentP value={object.cards[0].rarity} string="Rarity"/>
+				<IsPresentP value={object.cards[0].set} string="Set"/>
+				<IsPresentP value={object.cards[0].artist} string="Artist"/>
+				<IsPresentP value={object.cards[0].number} string="Number"/>
+				<IsPresentP value={object.cards[0].multiverseid} string="Multiverse ID"/>
+				<IsPresentP value={object.cards[0].id} string="ID"/>
 			</div>
 		  </div>
 		</div>
@@ -84,10 +88,16 @@
 			</h2>
 			<div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
 			  <div class="accordion-body">
-				<p>Rulings</p><IsPresentP value={object.cards[0].rulings}/>
-				<p>Original Text</p><IsPresentP value={object.cards[0].originalText}/>
-				<p>Original Type</p><IsPresentP value={object.cards[0].originalType}/>
-			  </div>
+				<IsPresentP value={object.cards[0].originalText} string="Originial Text"/>
+				<IsPresentP value={object.cards[0].originalType} string="Originial Type"/>
+				{#if object.cards[0].rulings}
+				<p>Rulings</p>
+					{#each object.cards[0].rulings as ruling,i}
+					<p>{ruling.date}</p>
+					<p>{ruling.text}</p>
+				{/each}
+				{/if}
+			</div>
 			</div>
 		  </div>
 	  </div>
