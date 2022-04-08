@@ -4,7 +4,7 @@
 </script>
 
 {#if value}
-	{#if string != "0"}	
+	{#if string !== "0"}	
 		<p>{string}</p>	
 	{/if}
 		<p>{String(value)}</p>

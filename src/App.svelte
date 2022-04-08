@@ -2,21 +2,29 @@
 	
 	import IsPresentH3 from "./IsPresentH3.svelte"
 	import IsPresentP from "./IsPresentP.svelte"
-
-	const getCard = async () => {
-		var response = await fetch('https://api.magicthegathering.io/v1/cards?random=true&pageSize=01&contains=imageUrl&layout=normal');
+	let	cardPromise = null
+	async function getCard(userInput){
+		var response = await fetch('https://api.magicthegathering.io/v1' + userInput);
 		var result = await response.json();
 		return result;
 	}
-	let cardPromise = getCard();
+	function loadCard(userInput){
+		cardPromise = getCard(userInput);
+	}
 </script>
 
 
 <center>
-
-{#await cardPromise}
+	<button on:click={()=>{loadCard("/cards?random=true&pageSize=01&contains=imageUrl&layout=normal")}}>
+		Random Card
+	</button>
+	<button on:click={()=>{loadCard()}}>
+		Also random card
+	</button>
+{#if cardPromise}
+	{#await cardPromise}
 	<p>...waiting</p>
-{:then object}
+	{:then object}
 	<h1>{object.cards[0].name}</h1>
 	<IsPresentH3 value={object.cards[0].names} />
 	<!-- svelte-ignore a11y-img-redundant-alt -->
@@ -24,12 +32,12 @@
 
 	<!-- ausklappbar -->
 	<IsPresentP value={object.cards[0].text} string="Text"/>
-	<i><IsPresentP value={object.cards[0].flavor}, string="0"/></i>
+	<i><IsPresentP value={object.cards[0].flavor} string="0"/></i>
 	{#if object.cards[0].types[0] == "Creature"}
 		<IsPresentP value={object.cards[0].power} string="Power"/>
 		<IsPresentP value={object.cards[0].toughness} string="Toughness"/>
 	{/if}
-<!-- each ruling as ruling -->
+
 
 	<div class="accordion" id="accordionPanelsStayOpenExample">
 		<div class="accordion-item">
@@ -103,4 +111,5 @@
 {:catch error}
 	<p style="color: red">{error.message}</p>
 {/await}
+{/if}
 </center>
