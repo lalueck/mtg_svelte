@@ -4,6 +4,7 @@
 	import IsPresentP from "./IsPresentP.svelte"
 	let	cardPromise = null
 	let searchQarry = null
+	let inProgress = null
 	async function getCard(userInput){
 		var response = await fetch('https://api.magicthegathering.io/v1' + userInput);
 		var result = await response.json();
@@ -11,6 +12,11 @@
 	}
 	function loadCard(userInput){
 		cardPromise = getCard(userInput);
+		inProgress = true;
+	}
+	function enableButton(){
+		inProgress = false;
+		return "";
 	}
 </script>
 
@@ -18,16 +24,17 @@
 
 <center>
 	<input bind:value={searchQarry}>
-	<button on:click={()=>{loadCard(`/cards?pageSize=01&contains=imageUrl&layout=normal&name="${searchQarry}"`)}}>
+	<button disabled={inProgress} on:click={()=>{loadCard(`/cards?pageSize=01&contains=imageUrl&layout=normal&name="${searchQarry}"`)}}>
 		Search for card
 	</button>
-	<button on:click={()=>{loadCard("/cards?random=true&pageSize=01&contains=imageUrl&layout=normal")}}>
+	<button disabled={inProgress} on:click={()=>{loadCard("/cards?random=true&pageSize=01&contains=imageUrl&layout=normal")}}>
 		Random Card
 	</button>
 {#if cardPromise}
 	{#await cardPromise}
 	<p>...waiting</p>
 	{:then object}
+	{enableButton()}
 	<h1>{object.cards[0].name}</h1>
 	<IsPresentH3 value={object.cards[0].names} />
 	<!-- svelte-ignore a11y-img-redundant-alt -->
